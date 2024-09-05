@@ -35,14 +35,6 @@ var (
 	gameJoinReportEntryPattern  = regexp.MustCompile(`Report game_join_loadtime: placeid:([0-9]+).*universeid:([0-9]+)`)
 )
 
-type ServerType int
-
-const (
-	Public ServerType = iota
-	Private
-	Reserved
-)
-
 type BloxstrapRPC struct {
 	presence drpc.Activity
 	client   *drpc.Client
