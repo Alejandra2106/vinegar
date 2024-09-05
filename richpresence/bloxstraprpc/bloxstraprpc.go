@@ -51,9 +51,6 @@ type BloxstrapRPC struct {
 	teleporting bool
 	server      ServerType
 
-	universeID rbxweb.UniverseID
-	placeID    string
-	jobID      string
 }
 
 func New() *BloxstrapRPC {
@@ -170,9 +167,6 @@ func (b *BloxstrapRPC) handleGameLeave() error {
 	b.gameTime = time.Time{}
 	b.teleporting = false
 	b.server = Public
-	b.universeID = rbxweb.UniverseID(0)
-	b.placeID = ""
-	b.jobID = ""
 
 	slog.Info("Handled GameLeave")
 
