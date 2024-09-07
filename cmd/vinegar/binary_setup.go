@@ -51,18 +51,18 @@ func (b *Binary) Setup() error {
 		return fmt.Errorf("fetch: %w", err)
 	}
 
-	b.Dir = filepath.Join(dirs.Versions, b.Deploy.GUID)
-	b.Splash.SetDesc(fmt.Sprintf("%s %s", b.Deploy.GUID, b.Deploy.Channel))
+	b.Dir = filepath.Join(dirs.Versions, b.Deploy.UID)
+	b.Splash.SetDesc(fmt.Sprintf("%s %s", b.Deploy.UID, b.Deploy.Channel))
 
-	if b.State.Version != b.Deploy.GUID {
+	if b.State.Version != b.Deploy.UID {
 		slog.Info("Installing Binary", "name", b.Type,
-			"old_guid", b.State.Version, "new_guid", b.Deploy.GUID)
+			"old_guid", b.State.Version, "new_guid", b.Deploy.UID)
 
 		if err := b.Install(); err != nil {
-			return fmt.Errorf("install %s: %w", b.Deploy.GUID, err)
+			return fmt.Errorf("install %s: %w", b.Deploy.UID, err)
 		}
 	} else {
-		slog.Info("Binary is up to date!", "name", b.Type, "guid", b.Deploy.GUID)
+		slog.Info("Binary is up to date!", "name", b.Type, "guid", b.Deploy.UID)
 	}
 
 	b.Config.Env.Setenv()
@@ -88,7 +88,7 @@ func (b *Binary) Setup() error {
 }
 
 func (b *Binary) SetupOverlay() error {
-	dir := filepath.Join(dirs.Overlays, strings.ToLower(b.Type.Short()))
+	dir := filepath.Join(dirs.Overlays, strings.ToLower(b.Type.Short())
 
 	// Don't copy Overlay if it doesn't exist
 	_, err := os.Stat(dir)
